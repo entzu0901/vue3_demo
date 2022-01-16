@@ -1,26 +1,40 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <h1>一個人的訊息</h1>
+  <h2>姓名:{{name}}</h2>
+  <h2>年齡:{{age}}</h2>
+  <h2>工作種類:{{job.type}}</h2>
+  <h2>工作薪水:{{job.salary}}</h2>
+  <button @click="change">修改人的訊息</button>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import { ref } from '@vue/reactivity'
 export default {
   name: 'App',
-  components: {
-    HelloWorld
+  setup(){
+    let name=ref('張三')
+    let age=ref(20)
+    let job=ref({
+      type:"前端工程師",
+      salary:'30k'
+    })
+    function change() {
+     name.value="李四",
+     age.value=30,
+     job.value.type='UI設計師',
+     job.value.salary="55k"
+    }
+    return{
+      name,
+      age,
+      change,
+      job
+    }
+      // return ()=> h('h1','blibli')
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>

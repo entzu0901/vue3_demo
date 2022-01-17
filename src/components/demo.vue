@@ -1,28 +1,35 @@
 <template>
-  <h2>姓名:{{person.name}}</h2>
-  <h2>年齡:{{person.age}}</h2>
-  <button @click="test1">測試觸發hello事件</button>
-  <slot></slot>
+  <h1>一個人的訊息</h1>
+  姓:<input type="text" v-model="person.firstName">
+  <br>
+  名:<input type="text" v-model="person.lastName">
+  <br>
+  <span>全名:{{person.fullName}}</span>
+  <br>
+  全名:<input type="text" v-model="person.fullName">  
 </template>
 
 <script>
-import {reactive} from 'vue'
+import {reactive,computed} from 'vue'
 export default {
   name: 'demo',
-  props:['msg','school'],
-  emits:['hello'],
-  setup(props,context){
-    console.log(context.emit)
-    console.log(context.slots)
+  setup(){
     let person=reactive({
-      name:'張三',
-      age:20
+      firstName:'張',
+      lastName:'三'
     })
-    function test1() {
-        context.emit('hello',666)
-    }
+    person.fullName=computed({
+        get(){
+            return person.firstName+'-'+person.lastName
+        },
+        set(value){
+            const nameArr=value.split('-')
+            person.firstName=nameArr[0]
+            person.lastName=nameArr[1]
+        }
+    })
   return{
-    person,test1
+    person
   }
       // return ()=> h('h1','blibli')
  }

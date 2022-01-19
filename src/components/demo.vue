@@ -1,41 +1,19 @@
 <template>
-  <h1>一個人的訊息</h1>
-  姓:<input type="text" v-model="person.firstName">
-  <br>
-  名:<input type="text" v-model="person.lastName">
-  <br>
-  <span>全名:{{person.fullName}}</span>
-  <br>
-  全名:<input type="text" v-model="person.fullName">  
+  <h2>當前求和為{{sum}}</h2>
+  <button @click="sum++">點我+1</button>
+  <hr>
+  <h2>當前點擊的滑鼠座標為x:{{point.x}},y:{{point.y}}</h2>
 </template>
 
 <script>
-import {reactive,computed} from 'vue'
+import {ref} from 'vue'
+import usePoint from '../hook/usepoint'
 export default {
   name: 'demo',
   setup(){
-    let person=reactive({
-      firstName:'張',
-      lastName:'三'
-    })
-    person.fullName=computed({
-        get(){
-            return person.firstName+'-'+person.lastName
-        },
-        set(value){
-            const nameArr=value.split('-')
-            person.firstName=nameArr[0]
-            person.lastName=nameArr[1]
-        }
-    })
-  return{
-    person
+    let sum=ref(0)
+    let point=usePoint()
+   return{sum,point}
   }
-      // return ()=> h('h1','blibli')
- }
 }
 </script>
-
-<style>
-
-</style>

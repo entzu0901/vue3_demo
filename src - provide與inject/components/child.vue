@@ -6,10 +6,15 @@
 </template>
 
 <script>
+import {inject} from 'vue'
 import son from './son.vue'
 export default {
     name:'child',
     components:{son},
+    setup(){
+        let x= inject('car')
+        console.log(x,'@@@')
+    }
 }
 </script>
 

@@ -1,15 +1,18 @@
 <template>
   <div class="son">
-      <h3>我是孫子組件</h3>
-      <talk></talk>
+      <h3>我是孫子組件{{car.name}}--{{car.price}}</h3>
   </div>
 </template>
 
 <script>
-import talk from './talk.vue'
+import {inject} from 'vue'
 export default {
     name:'son',
-    components:{talk}
+    setup(){
+        let car=inject('carmsg')
+        console.log(car,'@@@')
+        return{car}
+    }
 }
 </script>
 
